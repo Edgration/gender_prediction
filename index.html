@@ -142,7 +142,29 @@
             width: 10px;
         }
 
-        
+        #loading {
+            display: none; /* 默认隐藏 */
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
 
     </style>
 </head>
@@ -155,6 +177,10 @@
     </form>
     <h2>Prediction Results</h2>
     <p id="results"></p>
+    <div id="loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
 
     <div class="history-container">
         <div class="history-title">Test History</div>

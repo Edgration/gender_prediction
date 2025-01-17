@@ -50,6 +50,11 @@ document.getElementById("prediction-form").addEventListener("submit", async (eve
     event.preventDefault();
     let inputHiragana = document.getElementById("hiragana").value.trim();
 
+    const loadingElement = document.getElementById("loading");
+    loadingElement.style.display = "block";
+    document.getElementById("results").innerText = "";
+
+
     // 如果输入的是罗马字，则转换为平假名
     if (!inputHiragana.match(/[\u3040-\u309F]/)) { // 检查输入是否已经包含平假名
         inputHiragana = convertRomajiToHiragana(inputHiragana); // 转换罗马字为平假名
@@ -57,11 +62,14 @@ document.getElementById("prediction-form").addEventListener("submit", async (eve
 
     // 检查输入是否是合法的平假名字符
     if (!inputHiragana.match(/^[\u3040-\u309F]+$/)) {
+        loadingElement.style.display = "none";
         document.getElementById("results").innerText = "Input error: \nPlease enter valid Hiragana or Romaji.";
         return;
     }
 
+
     try {
+    	await new Promise((resolve) => setTimeout(resolve, 300));
         const response = await fetch("https://gender-prediction-8jy7.onrender.com/predict", {
             method: "POST",
             headers: {
@@ -74,6 +82,8 @@ document.getElementById("prediction-form").addEventListener("submit", async (eve
 
         // 显示输入的平假名及预测结果
 		const resultText = `${inputHiragana}: Female: ${(data.female * 100).toFixed(2)}%, Male: ${(data.male * 100).toFixed(2)}%`;
+		
+		loadingElement.style.display = "none";	
 		document.getElementById("results").innerText = resultText;
 
         // 保存历史记录到本地存储
@@ -84,6 +94,7 @@ document.getElementById("prediction-form").addEventListener("submit", async (eve
         // 显示历史记录
         displayHistory();
     } catch (error) {
+    	loadingElement.style.display = "none";
         console.error("Error:", error);
         document.getElementById("results").innerText = "An error occurred.\n Please try again.";
     }
