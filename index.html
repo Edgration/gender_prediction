@@ -4,16 +4,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gender Prediction</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        h1 {
+            font-size: 2rem; /* 默认字体大小 */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.8rem; /* 手机设备时减小字体大小 */
+            }
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        label {
+            text-align: center;
+            display: block; 
+            margin-bottom: 10px; 
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 93%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            display: block;         
+            margin: 0 auto;        
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #results {
+            font-size: 18px;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .history-container {
+            margin-top: 30px;
+            width: 300px;
+        }
+
+        .history-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .history-list {
+            text-align: center;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .history-item {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .history-item:hover {
+            background-color: #f1f1f1;
+        }
+
+        #footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+       #github-link, #pdf-link, #email-link {
+            font-size: 20px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        #github-link:hover, #pdf-link:hover, #email-link:hover {
+            color: #0073e6; 
+        }
+
+        span {
+            display: inline-block;
+            width: 10px;
+        }
+
+        
+
+    </style>
 </head>
 <body>
-    <h1>Gender Prediction from Hiragana</h1>
+    <h1>Gender Prediction in Japanese Names</h1>
     <form id="prediction-form" method="POST">
-        <label for="hiragana">Enter Hiragana:</label>
+        <label for="hiragana">Please Enter Hiragana or Romaji <br> (e.g., 'るか' or 'ru ka'):</label>
         <input type="text" id="hiragana" name="hiragana" required>
         <button type="submit">Predict</button>
     </form>
     <h2>Prediction Results</h2>
     <p id="results"></p>
+
+    <div class="history-container">
+        <div class="history-title">Test History</div>
+        <button id="clear-history-btn" onclick="clearHistory()">Clear History</button>
+        <ul class="history-list" id="history-list">
+            <!-- History items will be listed here -->
+        </ul>
+    </div>
+
+    <div id="footer">
+        <a href="https://github.com/Edgration/gender_prediction" id="github-link" target="_blank">
+            <i class="fab fa-github"></i>
+        </a>
+        <span style="margin: 0 10px;"></span> <!-- 这里是间距 -->
+        <a href="https://moodle.cc.sophia.ac.jp/pluginfile.php/2710105/mod_forum/attachment/1154144/Gender_Prediction_in_Japanese_Names.pdf?forcedownload=1" id="pdf-link" target="_blank">
+            <i class="fa-solid fa-file-pdf"></i>
+        </a>
+        <span style="margin: 0 10px;"></span> <!-- 这里是间距 -->
+        <a href="mailto:your-email@example.com" id="email-link" target="_blank">
+            <i class="fa-solid fa-envelope"></i>
+        </a>
+    </div>
+
+    <!-- Import wanakana library first -->
+    <script src="https://cdn.jsdelivr.net/npm/wanakana@4.0.0/wanakana.min.js"></script>
+    <!-- Then load your custom script -->
     <script src="script.js"></script>
+
 </body>
 </html>
