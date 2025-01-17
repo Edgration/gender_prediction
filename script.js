@@ -69,7 +69,7 @@ document.getElementById("prediction-form").addEventListener("submit", async (eve
 
 
     try {
-    	await new Promise((resolve) => setTimeout(resolve, 300));
+    	await new Promise((resolve) => setTimeout(resolve, 1000));
         const response = await fetch("https://gender-prediction-8jy7.onrender.com/predict", {
             method: "POST",
             headers: {
