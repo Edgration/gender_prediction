@@ -3,7 +3,7 @@ document.getElementById("prediction-form").addEventListener("submit", async (eve
     const inputHiragana = document.getElementById("hiragana").value;
 
     try {
-        const response = await fetch("https://your-backend-endpoint/predict", {
+        const response = await fetch("http://127.0.0.1:5000/predict", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
